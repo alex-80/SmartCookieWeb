@@ -1,8 +1,14 @@
+//import com.getkeepsafe.dexcount.OutputFormat
+
+//plugins {
+//    id 'org.jetbrains.kotlin.android' version "$kotlinVersion"
+//}
+
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
-apply plugin: 'com.getkeepsafe.dexcount'
+//apply plugin: 'com.getkeepsafe.dexcount'
 apply plugin: 'jacoco'
 
 android {
@@ -98,6 +104,10 @@ android {
     }
     buildFeatures {
         dataBinding true
+        compose true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion = composeVersion
     }
 }
 
@@ -105,13 +115,13 @@ jacoco {
     toolVersion = "0.8.6"
 }
 
-dexcount {
-    includeClasses = false
-    includeFieldCount = false
-    format = "tree"
-    orderByMethodCount = true
-    verbose = false
-}
+//dexcount {
+//    includeClasses = false
+//    includeFieldCount = false
+//    format = OutputFormat.TREE
+//    orderByMethodCount = true
+//    verbose = false
+//}
 
 dependencies {
     testImplementation 'junit:junit:4.12'
@@ -143,7 +153,7 @@ dependencies {
     kapt "com.anthonycr.mezzanine:mezzanine-compiler:1.1.1"
 
     // dependency injection
-    final def daggerVersion = '2.38.1'
+    final def daggerVersion = '2.44'
     implementation "com.google.dagger:dagger:$daggerVersion"
     kapt "com.google.dagger:dagger-compiler:$daggerVersion"
     compileOnly 'javax.annotation:jsr250-api:1.0'
@@ -183,7 +193,8 @@ dependencies {
 
     implementation 'com.anthonycr.progress:animated-progress:1.0'
     // kotlin
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion"
+//    implementation(platform("org.jetbrains.kotlin:kotlin-bom:$kotlinVersion"))
+//    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion"
 
     // color picker
     implementation 'com.github.QuadFlask:colorpicker:0.0.15'
@@ -206,7 +217,23 @@ dependencies {
 
     // code editor
     implementation 'com.github.ahmadaghazadeh:CodeEditor:1.0.17'
+
+    // compose
+    implementation "androidx.compose.ui:ui:$composeVersion"
+    implementation 'androidx.compose.material3:material3:1.0.1'
+    implementation "androidx.compose.ui:ui-tooling:$composeVersion"
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.5.1'
+
+    // Android Studio Preview support
+    implementation "androidx.compose.ui:ui-tooling-preview:$composeVersion"
+    debugImplementation "androidx.compose.ui:ui-tooling:$composeVersion"
+
+    // UI Tests
+    androidTestImplementation "androidx.compose.ui:ui-test-junit4:$composeVersion"
+    debugImplementation "androidx.compose.ui:ui-test-manifest:$composeVersion"
 }
+
+
 
 kapt {
     arguments {

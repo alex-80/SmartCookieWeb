@@ -6,17 +6,19 @@
 package com.cookiegames.smartcookie.onboarding
 
 import android.Manifest
-import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import androidx.compose.foundation.background
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
 import com.cookiegames.smartcookie.AppTheme
-import com.cookiegames.smartcookie.R
 import com.cookiegames.smartcookie.di.injector
 import com.cookiegames.smartcookie.preference.UserPreferences
+import com.cookiegames.smartcookie.ui.onboarding.PermissionsScreen
 import javax.inject.Inject
 
 
@@ -29,32 +31,30 @@ class PermsFragment : Fragment() {
             inflater: LayoutInflater,
             container: ViewGroup?,
             savedInstanceState: Bundle?
-    ): View? = inflater.inflate(R.layout.fragment_onboarding_permissions, container, false)
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        var col: Int
-        var textCol: Int
+    ): View = ComposeView(requireContext()).apply {
+        var col: Color
+        var textCol: Color
 
         when (userPreferences.useTheme) {
             AppTheme.LIGHT ->{
-                col = Color.WHITE
-                textCol = Color.BLACK
+                col = Color.White
+                textCol = Color.Black
             }
             AppTheme.DARK ->{
-                textCol = Color.WHITE
-                col = Color.BLACK
+                textCol = Color.White
+                col = Color.Black
             }
             AppTheme.BLACK ->{
-                textCol = Color.WHITE
-                col = Color.BLACK
+                textCol = Color.White
+                col = Color.Black
             }
         }
-
-        requireView().setBackgroundColor(col)
-        requireView().findViewById<TextView>(R.id.permissionsTitle).setTextColor(textCol)
-        requireView().findViewById<TextView>(R.id.permissionsDescription).setTextColor(textCol)
+        setContent {
+            PermissionsScreen(
+                modifier = Modifier.background(col),
+                textColor = textCol,
+            )
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -5,21 +5,22 @@
 
 package com.cookiegames.smartcookie.onboarding
 
-import android.content.Context
-import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
-import android.widget.AbsListView.CHOICE_MODE_SINGLE
-import android.widget.AdapterView.OnItemClickListener
+import androidx.compose.foundation.background
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
 import com.cookiegames.smartcookie.AppTheme
 import com.cookiegames.smartcookie.R
 import com.cookiegames.smartcookie.di.injector
 import com.cookiegames.smartcookie.preference.UserPreferences
 import com.cookiegames.smartcookie.search.SearchEngineProvider
+import com.cookiegames.smartcookie.ui.onboarding.ThemeChoiceScreen
 import javax.inject.Inject
 
 
@@ -31,54 +32,53 @@ class ThemeChoiceFragment : Fragment() {
     lateinit var userPreferences: UserPreferences
 
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
-    ): View? = inflater.inflate(R.layout.fragment_onboarding_theme_choice, container, false)
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        var col: Int
-        var textCol: Int
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View = ComposeView(requireContext()).apply {
+        val col: Color
+        val textCol: Color
 
         when (userPreferences.useTheme) {
-            AppTheme.LIGHT ->{
-                col = Color.WHITE
-                textCol = Color.BLACK
+            AppTheme.LIGHT -> {
+                col = Color.White
+                textCol = Color.Black
             }
-            AppTheme.DARK ->{
-                textCol = Color.WHITE
-                col = Color.BLACK
+
+            AppTheme.DARK -> {
+                textCol = Color.White
+                col = Color.Black
             }
-            AppTheme.BLACK ->{
-                textCol = Color.WHITE
-                col = Color.BLACK
+
+            AppTheme.BLACK -> {
+                textCol = Color.White
+                col = Color.Black
             }
         }
-
-        requireView().setBackgroundColor(col)
-        requireView().findViewById<TextView>(R.id.themeTitle).setTextColor(textCol)
-
-        val listView = activity?.findViewById<ListView>(R.id.themes)
         val values = AppTheme.values().map { it }
         val names = AppTheme.values().map { it.toDisplayString() }
-        val arrayAdapter = ArrayAdapter(activity as Context, android.R.layout.simple_list_item_single_choice, names)
-        listView?.adapter = arrayAdapter
-        listView?.choiceMode = CHOICE_MODE_SINGLE
-        listView?.setItemChecked(0, true)
-
-        listView!!.onItemClickListener = OnItemClickListener { _, _, i, _ ->
-            userPreferences.useTheme = values[i]
-            activity?.recreate()
+        val selectedTheme = mutableStateOf(names[0])
+        setContent {
+            ThemeChoiceScreen(
+                modifier = Modifier.background(col),
+                textColor = textCol,
+                themes = names,
+                selectedTheme = selectedTheme.value,
+                onThemeSelected = { theme, index ->
+                    selectedTheme.value = theme
+                    userPreferences.useTheme = values[index]
+//                    activity?.recreate()
+                })
         }
     }
 
-    private fun AppTheme.toDisplayString(): String = getString(when (this) {
-        AppTheme.LIGHT -> R.string.light_theme
-        AppTheme.DARK -> R.string.dark_theme
-        AppTheme.BLACK -> R.string.black_theme
-    })
+    private fun AppTheme.toDisplayString(): String = getString(
+        when (this) {
+            AppTheme.LIGHT -> R.string.light_theme
+            AppTheme.DARK -> R.string.dark_theme
+            AppTheme.BLACK -> R.string.black_theme
+        }
+    )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -87,7 +87,7 @@ class ThemeChoiceFragment : Fragment() {
     }
 
     companion object {
-        fun newInstance() : ThemeChoiceFragment {
+        fun newInstance(): ThemeChoiceFragment {
             return ThemeChoiceFragment()
         }
     }

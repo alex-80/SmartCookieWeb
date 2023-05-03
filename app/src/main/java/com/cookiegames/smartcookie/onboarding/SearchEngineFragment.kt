@@ -5,25 +5,22 @@
 
 package com.cookiegames.smartcookie.onboarding
 
-import android.content.Context
-import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AbsListView.CHOICE_MODE_SINGLE
-import android.widget.AdapterView.OnItemClickListener
-import android.widget.ArrayAdapter
-import android.widget.CheckBox
-import android.widget.ListView
-import android.widget.TextView
+import androidx.compose.foundation.background
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
 import com.cookiegames.smartcookie.AppTheme
-import com.cookiegames.smartcookie.R
 import com.cookiegames.smartcookie.di.injector
 import com.cookiegames.smartcookie.preference.UserPreferences
 import com.cookiegames.smartcookie.search.SearchEngineProvider
 import com.cookiegames.smartcookie.search.engine.BaseSearchEngine
+import com.cookiegames.smartcookie.ui.onboarding.SearchChoiceScreen
 import javax.inject.Inject
 
 
@@ -34,52 +31,49 @@ class SearchEngineFragment : Fragment() {
     @Inject
     lateinit var userPreferences: UserPreferences
 
-    private lateinit var checkBox: CheckBox
-
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
-    ): View? = inflater.inflate(R.layout.search_choice, container, false)
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        var col: Int
-        var textCol: Int
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View = ComposeView(requireContext()).apply {
+        val col: Color
+        val textCol: Color
 
         when (userPreferences.useTheme) {
-            AppTheme.LIGHT ->{
-                col = Color.WHITE
-                textCol = Color.BLACK
+            AppTheme.LIGHT -> {
+                col = Color.White
+                textCol = Color.Black
             }
-            AppTheme.DARK ->{
-                textCol = Color.WHITE
-                col = Color.BLACK
+
+            AppTheme.DARK -> {
+                textCol = Color.White
+                col = Color.Black
             }
-            AppTheme.BLACK ->{
-                textCol = Color.WHITE
-                col = Color.BLACK
+
+            AppTheme.BLACK -> {
+                textCol = Color.White
+                col = Color.Black
             }
         }
-
-        requireView().setBackgroundColor(col)
-        requireView().findViewById<TextView>(R.id.permissionsTitle).setTextColor(textCol)
-
-        val listView = activity?.findViewById<ListView>(R.id.engines)
         val values = convertSearchEngineToString(searchEngineProvider.provideAllSearchEngines())
-        val arrayAdapter = ArrayAdapter(activity as Context, android.R.layout.simple_list_item_single_choice, values.drop(1))
-        listView?.adapter = arrayAdapter
-        listView?.choiceMode = CHOICE_MODE_SINGLE
-        listView?.setItemChecked(0, true)
-
-        listView!!.onItemClickListener = OnItemClickListener { adapterView, view, i, l ->
-            userPreferences.searchChoice = searchEngineProvider.mapSearchEngineToPreferenceIndex(searchEngineProvider.provideAllSearchEngines()[i+1])
+        val selectedEngine = mutableStateOf(values[1])
+        setContent {
+            SearchChoiceScreen(
+                modifier = Modifier.background(col),
+                engines = values.drop(1).toTypedArray(),
+                selectedEngine = selectedEngine.value,
+                onEngineSelected = { engine, index ->
+                    selectedEngine.value = engine
+                    userPreferences.searchChoice =
+                        searchEngineProvider.mapSearchEngineToPreferenceIndex(searchEngineProvider.provideAllSearchEngines()[index + 1])
+                },
+                textColor = textCol
+            )
         }
     }
 
     private fun convertSearchEngineToString(searchEngines: List<BaseSearchEngine>): Array<String> =
-            searchEngines.map { getString(it.titleRes) }.toTypedArray()
+        searchEngines.map { getString(it.titleRes) }.toTypedArray()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -88,7 +82,7 @@ class SearchEngineFragment : Fragment() {
     }
 
     companion object {
-        fun newInstance() : SearchEngineFragment {
+        fun newInstance(): SearchEngineFragment {
             return SearchEngineFragment()
         }
     }
