@@ -1,4 +1,4 @@
-package com.cookiegames.smartcookie.ui.onboarding
+package com.cookiegames.smartcookie.features.onboarding
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -22,7 +22,7 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.TextUnitType
 import androidx.compose.ui.unit.dp
 import com.cookiegames.smartcookie.R
-import com.cookiegames.smartcookie.ui.theme.AppIntroDefaultHeading
+import com.cookiegames.smartcookie.core.ui.theme.AppIntroDefaultHeading
 
 enum class Navbar {
     DEFAULT,

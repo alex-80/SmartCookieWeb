@@ -1,4 +1,4 @@
-package com.cookiegames.smartcookie.ui.theme
+package com.cookiegames.smartcookie.core.ui.theme
 
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight

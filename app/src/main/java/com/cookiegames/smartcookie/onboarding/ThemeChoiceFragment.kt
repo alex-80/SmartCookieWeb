@@ -20,7 +20,7 @@ import com.cookiegames.smartcookie.R
 import com.cookiegames.smartcookie.di.injector
 import com.cookiegames.smartcookie.preference.UserPreferences
 import com.cookiegames.smartcookie.search.SearchEngineProvider
-import com.cookiegames.smartcookie.ui.onboarding.ThemeChoiceScreen
+import com.cookiegames.smartcookie.features.onboarding.ThemeChoiceScreen
 import javax.inject.Inject
 
 

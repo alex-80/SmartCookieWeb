@@ -18,7 +18,7 @@ import androidx.fragment.app.Fragment
 import com.cookiegames.smartcookie.AppTheme
 import com.cookiegames.smartcookie.di.injector
 import com.cookiegames.smartcookie.preference.UserPreferences
-import com.cookiegames.smartcookie.ui.onboarding.PermissionsScreen
+import com.cookiegames.smartcookie.features.onboarding.PermissionsScreen
 import javax.inject.Inject
 
 

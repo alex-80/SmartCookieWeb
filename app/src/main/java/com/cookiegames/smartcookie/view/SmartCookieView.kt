@@ -412,12 +412,10 @@ class SmartCookieView(
 
             if (!isIncognito || DeviceCapabilities.FULL_INCOGNITO.isSupported) {
                 domStorageEnabled = true
-                setAppCacheEnabled(true)
                 databaseEnabled = true
                 cacheMode = WebSettings.LOAD_DEFAULT
             } else {
                 domStorageEnabled = false
-                setAppCacheEnabled(false)
                 databaseEnabled = false
                 cacheMode = WebSettings.LOAD_NO_CACHE
             }
@@ -434,7 +432,7 @@ class SmartCookieView(
                 .subscribeOn(databaseScheduler)
                 .observeOn(mainScheduler)
                 .subscribe { file ->
-                    setAppCachePath(file.path)
+//                    setAppCachePath(file.path)
                 }
 
             if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {

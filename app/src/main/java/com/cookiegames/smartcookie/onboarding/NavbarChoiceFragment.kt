@@ -19,8 +19,8 @@ import com.cookiegames.smartcookie.AppTheme
 import com.cookiegames.smartcookie.di.injector
 import com.cookiegames.smartcookie.preference.UserPreferences
 import com.cookiegames.smartcookie.search.SearchEngineProvider
-import com.cookiegames.smartcookie.ui.onboarding.Navbar
-import com.cookiegames.smartcookie.ui.onboarding.NavbarChoiceScreen
+import com.cookiegames.smartcookie.features.onboarding.Navbar
+import com.cookiegames.smartcookie.features.onboarding.NavbarChoiceScreen
 import javax.inject.Inject
 
 
