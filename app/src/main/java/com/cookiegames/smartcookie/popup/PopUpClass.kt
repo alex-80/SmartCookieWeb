@@ -53,7 +53,6 @@ import com.cookiegames.smartcookie.utils.isSpecialUrl
 import com.cookiegames.smartcookie.utils.stringContainsItemFromList
 import com.github.ahmadaghazadeh.editor.widget.CodeEditor
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import kotlinx.android.synthetic.main.activity_main.*
 import java.net.URL
 import javax.inject.Inject
 import kotlin.math.roundToInt

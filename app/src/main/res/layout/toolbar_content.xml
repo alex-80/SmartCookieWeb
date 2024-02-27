@@ -31,7 +31,7 @@
             app:tabIconTextSize="14dp" />
     </FrameLayout>
 
-    <include layout="@layout/search" />
+    <include layout="@layout/search" android:id="@+id/search_layout"/>
 
     <FrameLayout
         android:id="@+id/download_button"

@@ -9,12 +9,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.compose.ui.platform.ComposeView
 import com.cookiegames.smartcookie.features.settings.presentation.ui.AboutScreen
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class AboutSettingsFragment : AbstractSettingsFragment() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+  override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
 
 //        var webview = resources.getString(R.string.unknown)
 //
@@ -53,24 +54,24 @@ class AboutSettingsFragment : AbstractSettingsFragment() {
 //            true
 //        }
 
-    }
+  }
 
-    override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
+  override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
 //        addPreferencesFromResource(R.xml.preference_about)
-    }
+  }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View = ComposeView(requireContext()).apply {
-        setContent {
-            AboutScreen()
-        }
+  override fun onCreateView(
+    inflater: LayoutInflater,
+    container: ViewGroup?,
+    savedInstanceState: Bundle?
+  ): View = ComposeView(requireContext()).apply {
+    setContent {
+      AboutScreen()
     }
+  }
 
-    companion object {
-        private const val SETTINGS_VERSION = "pref_version"
-        private const val WEBVIEW_VERSION = "pref_webview"
-    }
+  companion object {
+    private const val SETTINGS_VERSION = "pref_version"
+    private const val WEBVIEW_VERSION = "pref_webview"
+  }
 }
