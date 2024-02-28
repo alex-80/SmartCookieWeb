@@ -15,12 +15,6 @@ apply plugin: 'com.google.dagger.hilt.android'
 android {
     compileSdkVersion project.targetSdkVersion
 
-    dexOptions {
-        javaMaxHeapSize "8g"
-        preDexLibraries false
-    }
-
-
     defaultConfig {
         minSdkVersion project.minSdkVersion
         targetSdkVersion project.targetSdkVersion
@@ -88,8 +82,6 @@ android {
             excludes += ['.readme']
         }
     }
-
-
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8

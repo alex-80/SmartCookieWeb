@@ -24,7 +24,7 @@
             android:layout_weight="1"
             android:ellipsize="end"
             android:gravity="center_vertical"
-            android:paddingLeft="@dimen/material_grid_margin"
+            android:paddingStart="@dimen/material_grid_margin"
             android:singleLine="true"
             android:textAppearance="?android:attr/textAppearanceListItem"
             android:textSize="22sp" />
@@ -46,8 +46,8 @@
             android:layout_height="match_parent"
             android:background="?selectableItemBackgroundBorderless"
             android:contentDescription="@null"
-            android:tint="?attr/iconColor"
-            app:srcCompat="@drawable/ic_search" />
+            app:srcCompat="@drawable/ic_search"
+            app:tint="?attr/iconColor" />
 
         <ImageButton
             android:id="@+id/button_back"
@@ -56,8 +56,8 @@
             android:layout_height="match_parent"
             android:background="?selectableItemBackgroundBorderless"
             android:contentDescription="@null"
-            android:tint="?attr/iconColor"
-            app:srcCompat="@drawable/ic_action_collapse" />
+            app:srcCompat="@drawable/ic_action_collapse"
+            app:tint="?attr/iconColor" />
 
         <ImageButton
             android:id="@+id/button_next"
@@ -66,8 +66,8 @@
             android:layout_height="match_parent"
             android:background="?selectableItemBackgroundBorderless"
             android:contentDescription="@null"
-            android:tint="?attr/iconColor"
-            app:srcCompat="@drawable/ic_action_expand" />
+            app:srcCompat="@drawable/ic_action_expand"
+            app:tint="?attr/iconColor" />
 
         <ImageButton
             android:id="@+id/button_quit"
@@ -76,7 +76,7 @@
             android:layout_height="match_parent"
             android:background="?selectableItemBackgroundBorderless"
             android:contentDescription="@null"
-            android:tint="?attr/iconColor"
-            app:srcCompat="@drawable/ic_action_delete" />
+            app:srcCompat="@drawable/ic_action_delete"
+            app:tint="?attr/iconColor" />
     </LinearLayout>
 </RelativeLayout>

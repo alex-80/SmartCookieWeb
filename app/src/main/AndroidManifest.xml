@@ -8,7 +8,7 @@
             <category android:name="android.intent.category.BROWSABLE" />
             <data android:scheme="https" />
         </intent>
-        <package android:name="com.cookiejarapps.smartcookieweb_ytdl"/>
+        <package android:name="com.cookiejarapps.smartcookieweb_ytdl" />
     </queries>
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -21,6 +21,7 @@
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
     <uses-feature
         android:name="android.hardware.camera"

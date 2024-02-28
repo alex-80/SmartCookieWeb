@@ -642,5 +642,6 @@
 
     <string name="no_installed_app">No installed app can open this file</string>
     <string name="data_scheme">Images stored as Base64 data cannot currently be downloaded</string>
+    <string name="pagespeed_error">This website uses PageSpeed. Source editing may not work as expected.</string>
     <!-- finish pages -->
 </resources>
